@@ -1,9 +1,9 @@
-//
-// Created by Rafael Arce Nazario on 9/21/20.
-//
+// class LList:
+// An implementation of the ADT List using linked list
+// Code from the OpenDSA book
 
 #include "LList.h"
-
+#include <string>
 
 LList::~LList() { clear(); }
 

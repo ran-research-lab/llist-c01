@@ -1,5 +1,10 @@
-#include "List.h"
+// class LList:
+// Declaration of the ADT List using linked list
+// Code from the OpenDSA book
 
+#include "List.h"
+#include <stdexcept>
+#include <string>
 #ifndef MAIN_LLIST_H
 #define MAIN_LLIST_H
 
