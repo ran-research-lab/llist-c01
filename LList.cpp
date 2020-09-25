@@ -5,7 +5,7 @@
 #include "LList.h"
 #include <string>
 
-LList::~LList() { clear(); }
+LList::~LList() { clear(); delete head; delete tail; }
 
 // Remove all elements
 void LList::clear() {
