@@ -21,7 +21,7 @@ TEST_CASE( "Testing AList class", "[AList]" ) {
     CHECK(L.to_string()=="<10,20|>");
     L.append(30);
     CHECK(L.to_string()=="<10,20|30>");
-    L.remove();
+    CHECK(L.remove() == 30);
     CHECK(L.to_string()=="<10,20|>");
     L.prev();
     L.prev();

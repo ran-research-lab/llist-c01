@@ -9,8 +9,8 @@ LList::~LList() { clear(); delete head; delete tail; }
 
 // Remove all elements
 void LList::clear() {
-    curr = head;
-    while(curr->next != tail) remove();
+    curr = head->next;
+    while(curr!= tail) remove();
     curr = tail;
 }
 
@@ -38,7 +38,7 @@ ListItemType LList::remove ()  {
         throw std::out_of_range("remove() in LList: current is at the tail, cannot remove");
 
     Node *tmp = curr->next;                 // Point to the node that will be deleted
-    ListItemType tmpData = tmp->data;       // Remember value
+    ListItemType tmpData = curr->data;      // Remember value
     curr->data = curr->next->data;          // Pull forward the next element
     if (curr->next == tail) tail = curr;    // Removed last, move tail
     curr->next = curr->next->next;          // Point around unneeded link
@@ -98,7 +98,6 @@ bool LList::isEmpty() const { return listSize == 0; }
 
 string LList::to_string() const {
     string res = "<";
-    int i = 0;
     Node *tmp = head->next;
     while (tmp!=tail) {
         if ( tmp == curr) res += "|";
