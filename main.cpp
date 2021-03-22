@@ -1,52 +1,73 @@
 // Su nombre aqui
 
-#define CATCH_CONFIG_MAIN  
-#include "catch.hpp"
+
 #include <vector>
 #include "LList.h"
 using namespace std;
 
+// Variables and macros for assertions, DO NOT CHANGE ****
+int totalAssertions = 0;
+int passedAssertions  = 0;
+#define expect( chk )  \
+    totalAssertions++; \
+    if (!(chk)) \
+        printf("Assertion (%s) failed %s at line %d \n", #chk, __FILE__,__LINE__); \
+    else { \
+        printf("Passed line %d: %s \n", __LINE__, #chk); \
+        passedAssertions++; \
+    }
+#define assertionReport() { \
+     printf("Passed %d of %d assertions\n",passedAssertions,totalAssertions); \
+     cout << endl; \
+    }
+//*******************************************************
 
-TEST_CASE( "Testing AList class", "[AList]" ) {
+
+
+int main() {
 
     LList L;
+
+    // Lets test the insertion and moving through the list
     L.append(10);
     L.append(20);
-    CHECK(L.to_string()=="<|10,20>");
+    expect(L.to_string()=="<|10,20>");
+    
     L.next();
-    CHECK(L.to_string()=="<10|20>");
-    L.next();
-    CHECK(L.to_string()=="<10,20|>");
-    L.next();
-    CHECK(L.to_string()=="<10,20|>");
-    L.append(30);
-    CHECK(L.to_string()=="<10,20|30>");
-    CHECK(L.remove() == 30);
-    CHECK(L.to_string()=="<10,20|>");
-    L.prev();
-    L.prev();
-    L.remove();
-    CHECK(L.to_string()=="<|20>");
-    L.append(40); L.append(50); L.append(60);
-    L.moveToPos(4);
-    CHECK(L.to_string()=="<20,40,50,60|>");
+    expect(L.to_string()=="<10|20>");
 
+    L.next();
+    expect(L.to_string()=="<10,20|>");
+    
+    L.next();
+    expect(L.to_string()=="<10,20|>");
+    
+    // Lets append one and then remove it
+    L.append(30);
+    expect(L.to_string()=="<10,20|30>");
+    expect(L.remove() == 30);
+    expect(L.to_string()=="<10,20|>");
+    L.prev();
+    L.prev();
+    expect(L.to_string()=="<|10,20>");
+    
+    // Does clear work?
     L.clear();
     L.append(70);
-    CHECK(L.to_string()=="<|70>");
+    expect(L.to_string()=="<|70>");
+
+    // How about insert ...
     L.insert(66);
-    CHECK(L.to_string()=="<|66,70>");
+    expect(L.to_string()=="<|66,70>");
     L.moveToEnd();
     L.insert(77);
     L.moveToEnd();
-    CHECK(L.to_string()=="<66,70,77|>");
+    expect(L.to_string()=="<66,70,77|>");
 
     L.moveToPos(0);
-    CHECK(L.to_string()=="<|66,70,77>");
+    expect(L.to_string()=="<|66,70,77>");
 
     L.moveToPos(2);
-    CHECK(L.to_string()=="<66,70|77>");
-    L.prev();
-    CHECK(L.to_string()=="<66|70,77>");
+    expect(L.to_string()=="<66,70|77>");
 
 }

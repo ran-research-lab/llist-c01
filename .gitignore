@@ -6,4 +6,5 @@ CMakeFiles/
 cmake-build-debug/
 .idea/
 catch.hpp
-
+./main
+CMakeFiles
