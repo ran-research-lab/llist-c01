@@ -111,3 +111,23 @@ string LList::to_string() const {
 
 
 }
+
+
+LList & LList::operator=(const LList &other) {
+  if (this != &other) {
+    // clear this object because we are copying over it
+    clear(); 
+
+    // traverse the other objet and copy each of its elements
+    Node *p = other.head->next;
+    while(p != other.tail) {
+      if (p == other.curr) moveToEnd();
+      append(p->data);
+      p = p->next;
+    }
+    
+    // just in case the current was at the tail
+    if (p == other.tail) moveToEnd();
+  }
+  return *this; 
+} 

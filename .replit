@@ -1,2 +1,2 @@
 language = "bash"
-run = "cmake .; make; ./main"
+run = "cmake . && make && ./main"

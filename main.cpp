@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "LList.h"
+#include <iostream>
 using namespace std;
 
 // Variables and macros for assertions, DO NOT CHANGE ****
@@ -17,12 +18,14 @@ int passedAssertions  = 0;
         passedAssertions++; \
     }
 #define assertionReport() { \
-     printf("Passed %d of %d assertions\n",passedAssertions,totalAssertions); \
-     cout << endl; \
+     printf("\033[3;42;30mPassed %d of %d assertions\033[0m\t\t\n",passedAssertions,totalAssertions); \
+     printf("\n"); \
     }
 //*******************************************************
 
 
+// You can erase the assertions and just leave the ones for the 
+// new member functions that you are creating.
 
 int main() {
 
@@ -70,4 +73,15 @@ int main() {
     L.moveToPos(2);
     expect(L.to_string()=="<66,70|77>");
 
+    L.moveToEnd();
+    expect(L.to_string()=="<66,70,77|>");
+
+    LList M;
+    M = L;
+    expect(M.to_string()=="<66,70,77|>");
+    M.append(42);
+    expect(M.to_string()=="<66,70,77|42>");
+    expect(L.to_string()=="<66,70,77|>");
+
+    assertionReport();    
 }

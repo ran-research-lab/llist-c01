@@ -80,6 +80,10 @@ public:
     // Returns a string in the form < e0, e1 | e2 >, where the "|" indicates
     // the current position
     string to_string() const;
+
+    // Overloading the assignment operator
+    LList & operator=(const LList &other);
+
 };
 
 
