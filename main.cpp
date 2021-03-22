@@ -12,13 +12,14 @@ int passedAssertions  = 0;
 #define expect( chk )  \
     totalAssertions++; \
     if (!(chk)) \
-        printf("Assertion (%s) failed %s at line %d \n", #chk, __FILE__,__LINE__); \
+        printf("\x1B[31mAssertion (%s) failed %s at line %d\033[0m\t\t\n", #chk, __FILE__,__LINE__); \
     else { \
-        printf("Passed line %d: %s \n", __LINE__, #chk); \
+        printf("\x1B[32mPassed line %d: %s\033[0m\t\t\n", __LINE__, #chk); \
         passedAssertions++; \
     }
 #define assertionReport() { \
-     printf("\033[3;42;30mPassed %d of %d assertions\033[0m\t\t\n",passedAssertions,totalAssertions); \
+     printf("==========================================\n"); \
+     printf("Passed %d of %d assertions\n",passedAssertions,totalAssertions); \
      printf("\n"); \
     }
 //*******************************************************
@@ -84,4 +85,7 @@ int main() {
     expect(L.to_string()=="<66,70,77|>");
 
     assertionReport();    
+
+    
 }
+
